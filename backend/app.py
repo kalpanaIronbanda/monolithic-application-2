@@ -4,7 +4,7 @@ from flask import Flask, jsonify
 import json
 import mysql.connector
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 def get_secret():
     secret_name = "dummynames"
