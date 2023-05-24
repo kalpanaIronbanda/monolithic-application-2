@@ -11,11 +11,13 @@ Node.js and npm (Node Package Manager)
 
 Installation
 -------------------
+yum install nodejs -y
+
 Clone this repository to your local machine:
-git clone https://github.com/your-username/frontend-react-app.git
+git clone https://github.com/kalpanaIronbanda/monolithic-application-2.git
 
 Navigate to the project directory:
-cd frontend
+cd monolithic-application-2/frontend
 
 Install the required dependencies using npm:
 npm install
