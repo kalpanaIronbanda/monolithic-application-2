@@ -6,7 +6,7 @@ const StudentTable = () => {
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
-    axios.get('<API_backend_URL/student>')
+    axios.get('url of backend/studentlist')
       .then(response => {
         setStudents(response.data);
       })
@@ -14,7 +14,7 @@ const StudentTable = () => {
         console.error('Error fetching student data:', error);
       });
 
-    axios.get('<API_backend_URL/employee>')
+    axios.get('url of backend/employeelist')
       .then(response => {
         setEmployees(response.data);
       })

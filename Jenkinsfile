@@ -75,8 +75,9 @@
         stage('Update frontend URL') {
             steps {  
                 sh 'echo "Updating frontend URL in App.js"'
-                sh "sed -i 's|\"backend url\"|\"${albEndpoint}\"|' ${WORKSPACE}/frontend/src/App.js"
-                sh 'echo "updated.."'  
+                sh "sed -i 's|\"url of backend/studentlist\"|\"${albEndpoint}/studentlist\"|' ${WORKSPACE}/frontend/src/App.js"
+                sh "sed -i 's|\"url of backend/employeelist\"|\"${albEndpoint}/employeelist\"|' ${WORKSPACE}/frontend/src/App.js"
+                sh 'echo "updated...."'  
             }
         }        
         
