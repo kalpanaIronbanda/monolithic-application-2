@@ -11,73 +11,69 @@ Services Involved:
 cloud : AWS
 services:
 1.EC2
-2.IAM
-3.RDS
-4.Secret manager
-
+2.RDS
 
 Prerequisites
 ---------------
 We are running this application on top of VM. So we need to launch an instance.
 Create a mysql database in rds
-create a secret in secret manager
 Install all the dependencies which are mentioned in dependencies.sh file in this repo
 
 Procedure
 ---------------
-1. launch an instance
+------>first we have to create an ec2 instance for Backend application
 
-2. In RDS, create mysql database
-Get the secrets like host,user,password
-    allow 3306 from the instance sg
+------>Create the database in rds and allow 3306 from backend instance sg 
+                    3306  --   backend-sg
 
-3. In secret manager create a secret to store your rds creds
+Go through with the commands :
 
-4. In IAM, 
-    a.create a policy with following json;
+---->Connect to the instance
 
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "AllowMyAppAccessToSecret",
-                "Effect": "Allow",
-                "Action": [
-                    "secretsmanager:GetSecretValue"
-                ],
-                "Resource": [
-                    "<give the arn of secret manager>"
-                ]
-            }
-        ]
-    }
-    b. create a role and attach the above policy
-5. attach the created role to an instance to get the permission to access secrets from secret manager
-
-
-6. connect to the instance 
-   ssh command
-7. Clone this repository to your local machine:
-git clone https://github.com/kalpanaIronbanda/monolithic-application-2.git
-
-Navigate to the project directory:
-cd backend
-
-8. install the dependencies
-   sh dependencies.sh
-
-9. cofiguration:
-   --------------
-   open app.py and replace the secretname and region
-
-
-10. Run the application
-    a.foreground------
-    # python3 app.py
-    b.background------
-    # nohup python3 app.py &
-
-
-app.py: This is the main application file where the Flask app is created and configured.
-dependencies.sh: Contains a list of Python dependencies required by the application.
-
+1)  yum install git -y 
+ 
+2)  git clone <'git url link'>
+ 
+3)  cd <'foldername'>
+ 
+4)  cd <'backend flodername'>
+ 
+5)  sh dependencies.sh  
+ 
+---->After installing all the dependencies, connect with rds and create a table and then insert some values as your requirement,--for that follow the below commands
+ 
+6)  mysql -h <'rds endpoint'> -u <'username'> -p <'password'>
+ 
+7)  CREATE TABLE <'tablename'>( name VARCHAR(50) NOT NULL, roll INT NOT NULL, grade CHAR(1) NOT NULL );
+ 
+8)  INSERT INTO <'tablename'>(name, roll, grade) VALUES ('leo hank', 103, 'A');
+ 
+    INSERT INTO <'tablename'>(name, roll, grade) VALUES ('ram', 104, 'B');
+ 
+    INSERT INTO <'tablename'>(name, roll, grade) VALUES ('devops', 105, 'B');
+ 
+9)  \q ----to exit from the rds
+ 
+ 
+ configuration:
+--------------
+ 
+    cofigure the application and give the rds creds i.e. host,username,password,db name
+ 
+1)  vi properties.db-----
+    update the dbname,host,username,password
+ 
+2)  esc+:wq!-----command to save the file
+    
+Run the application:
+----------------------
+     a. foreground------
+ 
+     1)  python3 app.py
+  
+     b. background------
+  
+     2)  nohup python3 app.py &
+  
+  
+  
