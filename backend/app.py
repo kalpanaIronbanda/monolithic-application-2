@@ -7,8 +7,8 @@ import mysql.connector
 app = Flask(__name__)
 
 def get_secret():
-    secret_name = "dummynames"
-    region_name = "us-east-2"
+    secret_name = "python-db-secret"
+    region_name = "ap-south-1"
 
     # Create a Secrets Manager client
     session = boto3.session.Session()
@@ -47,7 +47,7 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     return response
 
-@app.route('/employee')
+@app.route('/employeelist')
 def index():
     # Retrieve database credentials from AWS Secrets Manager
     db_credentials = get_secret()
@@ -62,7 +62,7 @@ def index():
 
     # Execute a query to retrieve data from the "employee" table
     cursor = cnx.cursor()
-    query = "SELECT * FROM employees"
+    query = "SELECT * FROM employeelist"
     cursor.execute(query)
     rows = cursor.fetchall()
 
@@ -83,7 +83,7 @@ def index():
     # Return the data as JSON
     return jsonify(results)
 
-@app.route('/student')
+@app.route('/studentlist')
 def home():
     # Retrieve database credentials from AWS Secrets Manager
     db_credentials = get_secret()
@@ -98,7 +98,7 @@ def home():
 
     # Execute a query to retrieve data from the "student" table
     cursor = cnx.cursor()
-    query = "SELECT * FROM student"
+    query = "SELECT * FROM studentlist"
     cursor.execute(query)
     rows = cursor.fetchall()
 
