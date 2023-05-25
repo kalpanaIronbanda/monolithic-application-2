@@ -117,7 +117,7 @@
                     sh '''
                     echo "installing......"
                     ssh root@${frontendhost} "rm -rf node_modules"
-                    ssh root@${frontendhost} "yum install nodejs -y && npm install"
+                    ssh root@${frontendhost} "yum install nodejs -y && npm install && npm install axios"
                     echo "installed successfully"
                     '''
                 }
